@@ -1,4 +1,3 @@
-config.h
 dwm
 dwm.o
 drw.o
