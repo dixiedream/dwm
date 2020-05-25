@@ -44,7 +44,6 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
 	{ NULL,       NULL },
 };
 
@@ -74,11 +73,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ ALTKEY|ShiftMask,             XK_h,      setmfact,       {.f = -0.05} },
+	{ ALTKEY|ShiftMask,             XK_l,      setmfact,       {.f = +0.05} },
 	{ ALTKEY|ControlMask,          	XK_minus,  setgaps,        {.i = -1 } },
 	{ ALTKEY|ControlMask,          	XK_plus,   setgaps,        {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
+	{ MODKEY|ControlMask,           XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 
@@ -89,8 +88,8 @@ static Key keys[] = {
 	{ MODKEY,             			XK_f,      fullscreen,     {0} },
 
 	/* Switching between monitors */
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_k,  focusmon,       {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_j, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 
