@@ -68,15 +68,13 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             			XK_Return, spawn,          {.v = termcmd } },
-	// { MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_Tab,    focusstack,     {.i = +1 } },
 	{ ALTKEY|ShiftMask,             XK_h,      setmfact,       {.f = -0.05} },
 	{ ALTKEY|ShiftMask,             XK_l,      setmfact,       {.f = +0.05} },
 	{ ALTKEY|ControlMask,          	XK_minus,  setgaps,        {.i = -1 } },
 	{ ALTKEY|ControlMask,          	XK_plus,   setgaps,        {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
+	{ MODKEY|ShiftMask,             XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 
 	/* Layout manipulation */
@@ -86,8 +84,8 @@ static Key keys[] = {
 	{ MODKEY,             			XK_f,      fullscreen,     {0} },
 
 	/* Switching between monitors */
-	{ MODKEY|ControlMask,           XK_k,  focusmon,       {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_j, focusmon,       {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_k,  	   focusmon,       {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_j,      focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 
@@ -123,8 +121,8 @@ static Button buttons[] = {
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
-	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
+	// { ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
-	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	// { ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
 
