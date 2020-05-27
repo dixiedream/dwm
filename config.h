@@ -15,15 +15,18 @@ static char selfgcolor[]            = "#eeeeee";
 static char selbordercolor[]        = "#005577";
 static char selbgcolor[]            = "#005577";
 static char titlefgcolor[]			= "#bbbbbb";
+static char titlebgcolor[]			= "#eeeeee";
+static char titlebordercolor[]		= "#eeeeee";
 static char *colors[][3] = {
        /*               fg           bg           border   */
        [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
        [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
-	   [SchemeTitle]  = { titlefgcolor, selbgcolor,  selbgcolor },
+	   [SchemeTitle]  = { titlefgcolor, titlebgcolor,  titlebordercolor },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4" };
+static const char *tags[] = { "", "", "", "" };
+static const char *alttags[] = { "", "", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -42,8 +45,8 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "",      tile },    /* first entry is default */
+	{ "",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL },
 };
 
