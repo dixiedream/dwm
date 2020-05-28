@@ -70,6 +70,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             			XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_Tab,    focusstack,     {.i = +1 } },
 	{ ALTKEY|ShiftMask,             XK_h,      setmfact,       {.f = -0.05} },
 	{ ALTKEY|ShiftMask,             XK_l,      setmfact,       {.f = +0.05} },
@@ -83,7 +84,6 @@ static Key keys[] = {
 	{ MODKEY,           			XK_space,  cyclelayout,    {.i = +1 } },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,             			XK_f,      fullscreen,     {0} },
 
 	/* Switching between monitors */
 	{ MODKEY|ControlMask,           XK_k,  	   focusmon,       {.i = -1 } },
