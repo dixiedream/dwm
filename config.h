@@ -72,8 +72,9 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *scrlockercmd[] = { "slock", NULL };
-static const char *brightnessupcmd[] = { "brightnessctl", "set", "+10", NULL };
-static const char *brightnessdowncmd[] = { "brightnessctl", "set", "10-", NULL };
+static const char *screenshotcmd[] = { "screenshot", NULL };
+static const char *brightnessupcmd[] = { "brightnessctl", "set", "10%+", NULL };
+static const char *brightnessdowncmd[] = { "brightnessctl", "set", "10%-", NULL };
 static const char *volumeraisecmd[] = { "amixer", "-q", "set", "Master", "5%+", NULL };
 static const char *volumelowercmd[] = { "amixer", "-q", "set", "Master", "5%-", NULL };
 static const char *volumetogglecmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
@@ -111,11 +112,15 @@ static Key keys[] = {
     { ALTKEY|MODKEY,                XK_l,      spawn,          {.v = scrlockercmd } },
     
     /* HotKeys */
+    { 0,                            Print,                  spawn,  {.v = screenshotcmd } },
     { 0,                            XF86MonBrightnessDown,  spawn,  {.v = brightnessdowncmd } },
     { 0,                            XF86MonBrightnessUp,    spawn,  {.v = brightnessupcmd } },
     { 0,                            XF86AudioMute,          spawn,  {.v = volumetogglecmd } },
     { 0,                            XF86AudioRaiseVolume,   spawn,  {.v = volumeraisecmd } },
     { 0,                            XF86AudioLowerVolume,   spawn,  {.v = volumelowercmd } },
+    { ALTKEY,                       XK_m,                   spawn,  {.v = volumetogglecmd } },
+    { ALTKEY,                       XK_Up,                  spawn,  {.v = volumeraisecmd } },
+    { ALTKEY,                       XK_Down,                spawn,  {.v = volumelowercmd } },
 
     /* Cmus */
     { ALTKEY|ControlMask,           XK_Left,   spawn,          {.v = cmusprevcmd } },
