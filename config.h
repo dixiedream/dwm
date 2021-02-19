@@ -6,8 +6,8 @@ static const unsigned int gappx     = 3;        /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=9:dpi=192" };
-static const char dmenufont[]       = "monospace:size=9:dpi=192";
+static const char *fonts[]          = { "monospace:size=9" };
+static const char dmenufont[]       = "monospace:size=9";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -34,7 +34,6 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -51,6 +50,12 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
+#define XF86MonBrightnessDown 0x1008ff03
+#define XF86MonBrightnessUp 0x1008ff02
+#define XF86AudioMute 0x1008ff12
+#define XF86AudioLowerVolume 0x1008ff11
+#define XF86AudioRaiseVolume 0x1008ff13
+#define Print 0x0000ff61
 #define MODKEY Mod4Mask
 #define ALTKEY Mod1Mask 
 #define TAGKEYS(KEY,TAG) \
@@ -66,6 +71,16 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *scrlockercmd[] = { "slock", NULL };
+static const char *brightnessupcmd[] = { "brightnessctl", "set", "+10", NULL };
+static const char *brightnessdowncmd[] = { "brightnessctl", "set", "10-", NULL };
+static const char *volumeraisecmd[] = { "amixer", "-q", "set", "Master", "5%+", NULL };
+static const char *volumelowercmd[] = { "amixer", "-q", "set", "Master", "5%-", NULL };
+static const char *volumetogglecmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *cmuspausecmd[] = { "cmus-remote", "--pause", NULL };
+static const char *cmusstopcmd[] = { "cmus-remote", "--stop", NULL };
+static const char *cmusprevcmd[] = { "cmus-remote", "--prev", NULL };
+static const char *cmusnextcmd[] = { "cmus-remote", "--next", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -93,6 +108,20 @@ static Key keys[] = {
 	{ MODKEY,						XK_n,	   spawn,		   SHCMD("st -e ranger") },
 	{ MODKEY,						XK_q,	   spawn,		   SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
+    { ALTKEY|MODKEY,                XK_l,      spawn,          {.v = scrlockercmd } },
+    
+    /* HotKeys */
+    { 0,                            XF86MonBrightnessDown,  spawn,  {.v = brightnessdowncmd } },
+    { 0,                            XF86MonBrightnessUp,    spawn,  {.v = brightnessupcmd } },
+    { 0,                            XF86AudioMute,          spawn,  {.v = volumetogglecmd } },
+    { 0,                            XF86AudioRaiseVolume,   spawn,  {.v = volumeraisecmd } },
+    { 0,                            XF86AudioLowerVolume,   spawn,  {.v = volumelowercmd } },
+
+    /* Cmus */
+    { ALTKEY|ControlMask,           XK_Left,   spawn,          {.v = cmusprevcmd } },
+    { ALTKEY|ControlMask,           XK_Up,     spawn,          {.v = cmuspausecmd } },
+    { ALTKEY|ControlMask,           XK_Right,  spawn,          {.v = cmusnextcmd } },
+    { ALTKEY|ControlMask,           XK_Down,   spawn,          {.v = cmusstopcmd } },
 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
