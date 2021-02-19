@@ -55,6 +55,7 @@ static const Layout layouts[] = {
 #define XF86AudioMute 0x1008ff12
 #define XF86AudioLowerVolume 0x1008ff11
 #define XF86AudioRaiseVolume 0x1008ff13
+#define XF86AudioMicMute 0x1008ffb2 
 #define Print 0x0000ff61
 #define MODKEY Mod4Mask
 #define ALTKEY Mod1Mask 
@@ -78,6 +79,7 @@ static const char *brightnessdowncmd[] = { "brightnessctl", "set", "10%-", NULL 
 static const char *volumeraisecmd[] = { "amixer", "-q", "set", "Master", "5%+", NULL };
 static const char *volumelowercmd[] = { "amixer", "-q", "set", "Master", "5%-", NULL };
 static const char *volumetogglecmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *mictogglecmd[] = { "pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle", NULL };
 static const char *cmuspausecmd[] = { "cmus-remote", "--pause", NULL };
 static const char *cmusstopcmd[] = { "cmus-remote", "--stop", NULL };
 static const char *cmusprevcmd[] = { "cmus-remote", "--prev", NULL };
@@ -119,6 +121,7 @@ static Key keys[] = {
     { 0,                            XF86AudioMute,          spawn,  {.v = volumetogglecmd } },
     { 0,                            XF86AudioRaiseVolume,   spawn,  {.v = volumeraisecmd } },
     { 0,                            XF86AudioLowerVolume,   spawn,  {.v = volumelowercmd } },
+    { 0,                            XF86AudioMicMute,       spawn,  {.v = mictogglecmd } },
     { ALTKEY,                       XK_m,                   spawn,  {.v = volumetogglecmd } },
     { ALTKEY,                       XK_Up,                  spawn,  {.v = volumeraisecmd } },
     { ALTKEY,                       XK_Down,                spawn,  {.v = volumelowercmd } },
