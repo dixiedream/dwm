@@ -80,10 +80,10 @@ static const char *volumeraisecmd[] = { "amixer", "-q", "set", "Master", "5%+", 
 static const char *volumelowercmd[] = { "amixer", "-q", "set", "Master", "5%-", NULL };
 static const char *volumetogglecmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
 static const char *mictogglecmd[] = { "pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle", NULL };
-static const char *cmuspausecmd[] = { "cmus-remote", "--pause", NULL };
-static const char *cmusstopcmd[] = { "cmus-remote", "--stop", NULL };
-static const char *cmusprevcmd[] = { "cmus-remote", "--prev", NULL };
-static const char *cmusnextcmd[] = { "cmus-remote", "--next", NULL };
+static const char *musicpausecmd[] = { "playerctl", "play-pause", NULL };
+static const char *musicstopcmd[] = { "playerctl", "play-pause", NULL };
+static const char *musicprevcmd[] = { "playerctl", "previous", NULL };
+static const char *musicnextcmd[] = { "playerctl", "next", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -126,11 +126,11 @@ static Key keys[] = {
     { ALTKEY,                       XK_Up,                  spawn,  {.v = volumeraisecmd } },
     { ALTKEY,                       XK_Down,                spawn,  {.v = volumelowercmd } },
 
-    /* Cmus */
-    { ALTKEY|ControlMask,           XK_Left,   spawn,          {.v = cmusprevcmd } },
-    { ALTKEY|ControlMask,           XK_Up,     spawn,          {.v = cmuspausecmd } },
-    { ALTKEY|ControlMask,           XK_Right,  spawn,          {.v = cmusnextcmd } },
-    { ALTKEY|ControlMask,           XK_Down,   spawn,          {.v = cmusstopcmd } },
+    /* Music/Video players */
+    { ALTKEY|ControlMask,           XK_Left,   spawn,          {.v = musicprevcmd } },
+    { ALTKEY|ControlMask,           XK_Up,     spawn,          {.v = musicpausecmd } },
+    { ALTKEY|ControlMask,           XK_Right,  spawn,          {.v = musicnextcmd } },
+    { ALTKEY|ControlMask,           XK_Down,   spawn,          {.v = musicstopcmd } },
 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
