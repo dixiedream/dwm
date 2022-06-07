@@ -103,13 +103,13 @@ static Key keys[] = {
 	{ MODKEY,           			XK_space,  cyclelayout,    {.i = +1 } },
 
 	/* Switching between monitors */
-	{ MODKEY|ControlMask,           XK_k,  	   focusmon,       {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_j,      focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_h,  	   focusmon,       {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_l,      focusmon,       {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_comma,  tagmon,         {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_period, tagmon,         {.i = +1 } },
 
 	/* Apps */
-	{ MODKEY,						XK_n,	   spawn,		   SHCMD("st -e ranger") },
+	{ MODKEY,						XK_n,	   spawn,		   SHCMD("st -e lf") },
 	{ MODKEY,						XK_q,	   spawn,		   SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
     { ALTKEY|MODKEY,                XK_l,      spawn,          {.v = scrlockercmd } },
