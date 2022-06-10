@@ -84,6 +84,7 @@ static const char *musicpausecmd[] = { "playerctl", "play-pause", NULL };
 static const char *musicstopcmd[] = { "playerctl", "play-pause", NULL };
 static const char *musicprevcmd[] = { "playerctl", "previous", NULL };
 static const char *musicnextcmd[] = { "playerctl", "next", NULL };
+static const char *cyclemonitors[] = { "autorandr", "--cycle", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -103,7 +104,8 @@ static Key keys[] = {
 	{ MODKEY,           			XK_space,  cyclelayout,    {.i = +1 } },
 
 	/* Switching between monitors */
-	{ MODKEY|ShiftMask,             XK_h,  	   focusmon,       {.i = -1 } },
+	{ MODKEY,           			XK_p,      spawn,          { .v = cyclemonitors } },
+    { MODKEY|ShiftMask,             XK_h,  	   focusmon,       {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_l,      focusmon,       {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period, tagmon,         {.i = +1 } },
