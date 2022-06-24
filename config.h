@@ -90,13 +90,14 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             			XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_Tab,    focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_Tab,    swapfocus,       },
+	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ ALTKEY|ShiftMask,             XK_h,      setmfact,       {.f = -0.05} },
 	{ ALTKEY|ShiftMask,             XK_l,      setmfact,       {.f = +0.05} },
 	{ ALTKEY|ControlMask,          	XK_minus,  setgaps,        {.i = -1 } },
 	{ ALTKEY|ControlMask,          	XK_plus,   setgaps,        {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_Return, zoom,           {0} },
-	{ MODKEY|ShiftMask,             XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
     { MODKEY,                       XK_f,      togglefullscr,  {0} },
 
@@ -107,8 +108,7 @@ static Key keys[] = {
 	{ MODKEY,           			XK_p,      spawn,          { .v = cyclemonitors } },
     { MODKEY|ShiftMask,             XK_h,  	   focusmon,       {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_l,      focusmon,       {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_o,      tagmon,         {.i = +1 } },
 
 	/* Apps */
 	{ MODKEY,						XK_n,	   spawn,		   SHCMD("st -e lf") },
