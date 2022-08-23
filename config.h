@@ -55,10 +55,10 @@ static const Layout layouts[] = {
 #define XF86AudioMute 0x1008ff12
 #define XF86AudioLowerVolume 0x1008ff11
 #define XF86AudioRaiseVolume 0x1008ff13
-#define XF86AudioMicMute 0x1008ffb2 
+#define XF86AudioMicMute 0x1008ffb2
 #define Print 0x0000ff61
 #define MODKEY Mod4Mask
-#define ALTKEY Mod1Mask 
+#define ALTKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -86,7 +86,7 @@ static const char *musicprevcmd[] = { "playerctl", "previous", NULL };
 static const char *musicnextcmd[] = { "playerctl", "next", NULL };
 static const char *cyclemonitors[] = { "autorandr", "--cycle", NULL };
 
-static Key keys[] = {
+static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             			XK_Return, spawn,          {.v = termcmd } },
@@ -115,7 +115,7 @@ static Key keys[] = {
 	{ MODKEY,						XK_q,	   spawn,		   SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
     { ALTKEY|MODKEY,                XK_l,      spawn,          {.v = scrlockercmd } },
-    
+
     /* HotKeys */
     { 0,                            Print,                  spawn,  {.v = screenshotcmd } },
     { 0,                            XF86MonBrightnessDown,  spawn,  {.v = brightnessdowncmd } },
@@ -143,7 +143,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	
+
 	/* DWM restart quit */
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 	{ MODKEY|ControlMask,           XK_r,      quit,           {1} },
@@ -151,7 +151,7 @@ static Key keys[] = {
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
-static Button buttons[] = {
+static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
