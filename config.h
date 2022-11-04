@@ -72,19 +72,20 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *scrlockercmd[] = { "slock", NULL };
-static const char *screenshotcmd[] = { "screenshot", NULL };
 static const char *brightnessupcmd[] = { "brightnessctl", "set", "10%+", NULL };
 static const char *brightnessdowncmd[] = { "brightnessctl", "set", "10%-", NULL };
-static const char *volumeraisecmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
-static const char *volumelowercmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL  };
-static const char *volumetogglecmd[] = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
+static const char *cyclemonitors[] = { "autorandr", "--cycle", NULL };
 static const char *mictogglecmd[] = { "pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle", NULL };
 static const char *musicpausecmd[] = { "playerctl", "play-pause", NULL };
 static const char *musicstopcmd[] = { "playerctl", "play-pause", NULL };
 static const char *musicprevcmd[] = { "playerctl", "previous", NULL };
 static const char *musicnextcmd[] = { "playerctl", "next", NULL };
-static const char *cyclemonitors[] = { "autorandr", "--cycle", NULL };
+static const char *notificationHistory[] = { "dunstctl", "history-pop", NULL };
+static const char *scrlockercmd[] = { "slock", NULL };
+static const char *screenshotcmd[] = { "screenshot", NULL };
+static const char *volumeraisecmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
+static const char *volumelowercmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL  };
+static const char *volumetogglecmd[] = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -99,40 +100,42 @@ static const Key keys[] = {
 	{ ALTKEY|ControlMask,          	XK_k,      setgaps,        {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_Return, zoom,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-    { MODKEY,                       XK_f,      togglefullscr,  {0} },
+  { MODKEY,                       XK_f,      togglefullscr,  {0} },
 
 	/* Layout manipulation */
 	{ MODKEY,           			XK_space,  cyclelayout,    {.i = +1 } },
 
 	/* Switching between monitors */
 	{ MODKEY,           			XK_p,      spawn,          { .v = cyclemonitors } },
-    { MODKEY|ShiftMask,             XK_h,  	   focusmon,       {.i = -1 } },
+  { MODKEY|ShiftMask,             XK_h,  	   focusmon,       {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_l,      focusmon,       {.i = +1 } },
 	{ MODKEY,                       XK_o,      tagmon,         {.i = +1 } },
 
 	/* Apps */
-	{ MODKEY,						XK_n,	   spawn,		   SHCMD("st -e lf") },
+	{ MODKEY,						XK_n,	   spawn,		   SHCMD("$TERMINAL -e lf") },
 	{ MODKEY,						XK_q,	   spawn,		   SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
-    { ALTKEY|MODKEY,                XK_l,      spawn,          {.v = scrlockercmd } },
+  { ALTKEY|MODKEY,                XK_l,      spawn,          {.v = scrlockercmd } },
 
-    /* HotKeys */
-    { 0,                            Print,                  spawn,  {.v = screenshotcmd } },
-    { 0,                            XF86MonBrightnessDown,  spawn,  {.v = brightnessdowncmd } },
-    { 0,                            XF86MonBrightnessUp,    spawn,  {.v = brightnessupcmd } },
-    { 0,                            XF86AudioMute,          spawn,  {.v = volumetogglecmd } },
-    { 0,                            XF86AudioRaiseVolume,   spawn,  {.v = volumeraisecmd } },
-    { 0,                            XF86AudioLowerVolume,   spawn,  {.v = volumelowercmd } },
-    { 0,                            XF86AudioMicMute,       spawn,  {.v = mictogglecmd } },
-    { ALTKEY,                       XK_m,                   spawn,  {.v = volumetogglecmd } },
-    { ALTKEY,                       XK_Up,                  spawn,  {.v = volumeraisecmd } },
-    { ALTKEY,                       XK_Down,                spawn,  {.v = volumelowercmd } },
+  /* HotKeys */
+  { 0,                            Print,                  spawn,  {.v = screenshotcmd } },
+  { 0,                            XF86MonBrightnessDown,  spawn,  {.v = brightnessdowncmd } },
+  { 0,                            XF86MonBrightnessUp,    spawn,  {.v = brightnessupcmd } },
+  { 0,                            XF86AudioMute,          spawn,  {.v = volumetogglecmd } },
+  { 0,                            XF86AudioRaiseVolume,   spawn,  {.v = volumeraisecmd } },
+  { 0,                            XF86AudioLowerVolume,   spawn,  {.v = volumelowercmd } },
+  { 0,                            XF86AudioMicMute,       spawn,  {.v = mictogglecmd } },
+  { ALTKEY,                       XK_m,                   spawn,  {.v = volumetogglecmd } },
+  { ALTKEY,                       XK_Up,                  spawn,  {.v = volumeraisecmd } },
+  { ALTKEY,                       XK_Down,                spawn,  {.v = volumelowercmd } },
 
-    /* Music/Video players */
-    { ALTKEY|ControlMask,           XK_Left,   spawn,          {.v = musicprevcmd } },
-    { ALTKEY|ControlMask,           XK_Up,     spawn,          {.v = musicpausecmd } },
-    { ALTKEY|ControlMask,           XK_Right,  spawn,          {.v = musicnextcmd } },
-    { ALTKEY|ControlMask,           XK_Down,   spawn,          {.v = musicstopcmd } },
+  { MODKEY|ShiftMask, XK_d, spawn, {.v = notificationHistory } },
+
+  /* Music/Video players */
+  { ALTKEY|ControlMask,           XK_Left,   spawn,          {.v = musicprevcmd } },
+  { ALTKEY|ControlMask,           XK_Up,     spawn,          {.v = musicpausecmd } },
+  { ALTKEY|ControlMask,           XK_Right,  spawn,          {.v = musicnextcmd } },
+  { ALTKEY|ControlMask,           XK_Down,   spawn,          {.v = musicstopcmd } },
 
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
