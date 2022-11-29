@@ -71,7 +71,6 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "st", NULL };
 static const char *brightnessupcmd[] = { "brightnessctl", "set", "10%+", NULL };
 static const char *brightnessdowncmd[] = { "brightnessctl", "set", "10%-", NULL };
 static const char *cyclemonitors[] = { "autorandr", "--cycle", NULL };
@@ -90,7 +89,7 @@ static const char *volumetogglecmd[] = { "pactl", "set-sink-mute", "@DEFAULT_SIN
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,             			XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,             			    XK_Return, spawn,          SHCMD("$TERMINAL") },
 	{ MODKEY,                       XK_Tab,    swapfocus,       },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -103,17 +102,17 @@ static const Key keys[] = {
   { MODKEY,                       XK_f,      togglefullscr,  {0} },
 
 	/* Layout manipulation */
-	{ MODKEY,           			XK_space,  cyclelayout,    {.i = +1 } },
+	{ MODKEY,           			      XK_space,  cyclelayout,    {.i = +1 } },
 
 	/* Switching between monitors */
-	{ MODKEY,           			XK_p,      spawn,          { .v = cyclemonitors } },
+	{ MODKEY,           			      XK_p,      spawn,          { .v = cyclemonitors } },
   { MODKEY|ShiftMask,             XK_h,  	   focusmon,       {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_l,      focusmon,       {.i = +1 } },
 	{ MODKEY,                       XK_o,      tagmon,         {.i = +1 } },
 
 	/* Apps */
-	{ MODKEY,						XK_n,	   spawn,		   SHCMD("$TERMINAL -e lf") },
-	{ MODKEY,						XK_q,	   spawn,		   SHCMD("$BROWSER") },
+	{ MODKEY,						            XK_n,	   spawn,		   SHCMD("$TERMINAL -e lf") },
+	{ MODKEY,						            XK_q,	   spawn,		   SHCMD("$BROWSER") },
 	{ MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
   { ALTKEY|MODKEY,                XK_l,      spawn,          {.v = scrlockercmd } },
 
@@ -129,7 +128,7 @@ static const Key keys[] = {
   { ALTKEY,                       XK_Up,                  spawn,  {.v = volumeraisecmd } },
   { ALTKEY,                       XK_Down,                spawn,  {.v = volumelowercmd } },
 
-  { MODKEY|ShiftMask, XK_d, spawn, {.v = notificationHistory } },
+  { MODKEY|ShiftMask,             XK_d, spawn, {.v = notificationHistory } },
 
   /* Music/Video players */
   { ALTKEY|ControlMask,           XK_Left,   spawn,          {.v = musicprevcmd } },
