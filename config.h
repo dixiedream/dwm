@@ -74,7 +74,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-nb", normbgcolo
 static const char *brightnessupcmd[] = { "brightnessctl", "set", "10%+", NULL };
 static const char *brightnessdowncmd[] = { "brightnessctl", "set", "10%-", NULL };
 static const char *cyclemonitors[] = { "autorandr", "--cycle", NULL };
-static const char *mictogglecmd[] = { "pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle", NULL };
+static const char *mictogglecmd[] = { "wpctl", "set-mute", "@DEFAULT_AUDIO_SOURCE@", "toggle", NULL };
 static const char *musicpausecmd[] = { "playerctl", "play-pause", NULL };
 static const char *musicstopcmd[] = { "playerctl", "play-pause", NULL };
 static const char *musicprevcmd[] = { "playerctl", "previous", NULL };
@@ -82,9 +82,9 @@ static const char *musicnextcmd[] = { "playerctl", "next", NULL };
 static const char *notificationHistory[] = { "dunstctl", "history-pop", NULL };
 static const char *scrlockercmd[] = { "slock", NULL };
 static const char *screenshotcmd[] = { "screenshot", NULL };
-static const char *volumeraisecmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
-static const char *volumelowercmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL  };
-static const char *volumetogglecmd[] = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
+static const char *volumeraisecmd[] = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL };
+static const char *volumelowercmd[] = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL  };
+static const char *volumetogglecmd[] = { "wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
