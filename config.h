@@ -82,9 +82,10 @@ static const char *musicnextcmd[] = { "playerctl", "next", NULL };
 static const char *notificationHistory[] = { "dunstctl", "history-pop", NULL };
 static const char *scrlockercmd[] = { "slock", NULL };
 static const char *screenshotcmd[] = { "screenshot", NULL };
-static const char *volumeraisecmd[] = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL };
-static const char *volumelowercmd[] = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL  };
-static const char *volumetogglecmd[] = { "wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL };
+// dwmblocks helper to send signals
+#define VOLUMERAISER() { .v = (const char*[]){ "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; kill -44 $(pidof dwmblocks)", NULL }}
+#define VOLUMELOWER() { .v = (const char*[]){ "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof dwmblocks)", NULL }}
+#define VOLUMETOGGLE() { .v = (const char*[]){ "/bin/sh", "-c", "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)", NULL }}
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -120,13 +121,13 @@ static const Key keys[] = {
   { 0,                            Print,                  spawn,  {.v = screenshotcmd } },
   { 0,                            XF86MonBrightnessDown,  spawn,  {.v = brightnessdowncmd } },
   { 0,                            XF86MonBrightnessUp,    spawn,  {.v = brightnessupcmd } },
-  { 0,                            XF86AudioMute,          spawn,  {.v = volumetogglecmd } },
-  { 0,                            XF86AudioRaiseVolume,   spawn,  {.v = volumeraisecmd } },
-  { 0,                            XF86AudioLowerVolume,   spawn,  {.v = volumelowercmd } },
+  { 0,                            XF86AudioMute,          spawn,  VOLUMETOGGLE() },
+  { 0,                            XF86AudioRaiseVolume,   spawn,  VOLUMERAISER() },
+  { 0,                            XF86AudioLowerVolume,   spawn,  VOLUMELOWER() },
   { 0,                            XF86AudioMicMute,       spawn,  {.v = mictogglecmd } },
-  { ALTKEY,                       XK_m,                   spawn,  {.v = volumetogglecmd } },
-  { ALTKEY,                       XK_Up,                  spawn,  {.v = volumeraisecmd } },
-  { ALTKEY,                       XK_Down,                spawn,  {.v = volumelowercmd } },
+  { ALTKEY,                       XK_m,                   spawn,  VOLUMETOGGLE() },
+  { ALTKEY,                       XK_Up,                  spawn,  VOLUMERAISER() },
+  { ALTKEY,                       XK_Down,                spawn,  VOLUMELOWER() },
 
   { MODKEY|ShiftMask,             XK_d, spawn, {.v = notificationHistory } },
 
