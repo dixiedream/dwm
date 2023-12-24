@@ -29,5 +29,6 @@ Applied patches
 - https://dwm.suckless.org/patches/restartsig/
 - https://dwm.suckless.org/patches/swapfocus/
 - https://dwm.suckless.org/patches/statusallmons/
-- https://dwm.suckless.org/patches/status2d/ [Old]
+- https://dwm.suckless.org/patches/statuscmd/
+- https://dwm.suckless.org/patches/status2d/
 - https://dwm.suckless.org/patches/xrdb/

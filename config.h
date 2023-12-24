@@ -68,6 +68,8 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+#define STATUSBAR "dwmblocks"
+
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
@@ -83,9 +85,9 @@ static const char *notificationHistory[] = { "dunstctl", "history-pop", NULL };
 static const char *scrlockercmd[] = { "slock", NULL };
 static const char *screenshotcmd[] = { "screenshot", NULL };
 // dwmblocks helper to send signals
-#define VOLUMERAISER() { .v = (const char*[]){ "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; kill -44 $(pidof dwmblocks)", NULL }}
-#define VOLUMELOWER() { .v = (const char*[]){ "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; kill -44 $(pidof dwmblocks)", NULL }}
-#define VOLUMETOGGLE() { .v = (const char*[]){ "/bin/sh", "-c", "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)", NULL }}
+#define VOLUMERAISER() { .v = (const char*[]){ "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; pkill -RTMIN+11 dwmblocks", NULL }}
+#define VOLUMELOWER() { .v = (const char*[]){ "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; pkill -RTMIN+11 dwmblocks", NULL }}
+#define VOLUMETOGGLE() { .v = (const char*[]){ "/bin/sh", "-c", "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; pkill -RTMIN+11 dwmblocks", NULL }}
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -159,7 +161,9 @@ static const Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	// { ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+  { ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
+	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
+	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
