@@ -1,5 +1,8 @@
 # DWM
 
+## 2.2.0
+- Add new shortcut `Super+Shift+o` for moving clients to left monitor
+
 ## 2.1.0
 - Changed Super+P command now points to autorandr --cycle
 
