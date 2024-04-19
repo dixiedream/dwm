@@ -110,6 +110,7 @@ static const Key keys[] = {
   { MODKEY|ShiftMask,             XK_h,  	   focusmon,       {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_l,      focusmon,       {.i = +1 } },
 	{ MODKEY,                       XK_o,      tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_i,      tagmon,         {.i = -1 } },
 
 	/* Apps */
 	{ MODKEY,						            XK_n,	   spawn,		   SHCMD("$TERMINAL -e lf") },
