@@ -1,0 +1,12 @@
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..7f1ee55
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,6 @@
++dwm
++dwm.o
++drw.o
++util.o
++# generated from config.def.h (suckless convention)
++config.h

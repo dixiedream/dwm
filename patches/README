@@ -1,0 +1,23 @@
+Local patches on top of vanilla dwm from suckless.org (see ../README).
+
+Apply in one shot from the repository root:
+
+	./patches/apply
+
+Or manually:
+
+	for p in patches/[0-9][0-9][0-9][0-9]-*.diff; do git apply "$p"; done
+
+Then:
+
+	cp config.def.h config.h   # or: make config.h
+	make
+
+Patches (order):
+  0001-gitignore.diff      — ignore build products and generated config.h
+  0002-config.def.h.diff   — rules, keys, colors, layouts, spawn commands
+  0003-drw.diff            — drw.c, drw.h
+  0004-util.diff           — util.c, util.h
+  0005-dwm.diff            — dwm.c (largest)
+
+Regenerate from a full tree with: git diff upstream/master..HEAD (split by file as needed).

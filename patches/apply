@@ -1,0 +1,19 @@
+#!/bin/sh
+# Apply all numbered patches in patches/ (suckless-style: 0001-*.diff, …).
+set -eu
+root="$(CDPATH= cd -- "$(dirname "$0")/.." && pwd)"
+cd "$root"
+n=0
+for p in $(find patches -maxdepth 1 -type f -name '[0-9][0-9][0-9][0-9]-*.diff' | LC_ALL=C sort); do
+	printf 'Applying %s\n' "$p"
+	git apply "$p" || {
+		printf 'git apply failed: %s\n' "$p" >&2
+		exit 1
+	}
+	n=$((n + 1))
+done
+if [ "$n" -eq 0 ]; then
+	printf 'No patches matching patches/[0-9][0-9][0-9][0-9]-*.diff\n' >&2
+	exit 1
+fi
+printf 'Applied %d patch(es). Run make.\n' "$n"
