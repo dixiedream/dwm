@@ -1,5 +1,9 @@
 # DWM
 
+## 3.0.0
+- Rebased onto DWM v6.8
+- Different folder structure for easy patching
+
 ## 2.2.0
 - Add new shortcut `Super+Shift+o` for moving clients to left monitor
 
